@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Winforms", "BankingSystem.Winforms\BankingSystem.Winforms.csproj", "{3FB2601E-E337-5A65-F316-71A3628E8D7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Application", "BankingSystem.Application\BankingSystem.Application.csproj", "{27B7FBF8-F0BD-487A-A31A-833297763E2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3FB2601E-E337-5A65-F316-71A3628E8D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FB2601E-E337-5A65-F316-71A3628E8D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FB2601E-E337-5A65-F316-71A3628E8D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27B7FBF8-F0BD-487A-A31A-833297763E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B7FBF8-F0BD-487A-A31A-833297763E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B7FBF8-F0BD-487A-A31A-833297763E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B7FBF8-F0BD-487A-A31A-833297763E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
