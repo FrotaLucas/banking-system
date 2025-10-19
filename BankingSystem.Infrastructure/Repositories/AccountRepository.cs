@@ -6,11 +6,11 @@ namespace BankingSystem.Infrastructure.Repositories
 {
     public class AccountRepository : IRepositoryAccount
     {
-        private readonly string connectionString;
+        private readonly string _connectionString;
 
         public AccountRepository(string connectionString)
         {
-            connectionString = connectionString;
+            _connectionString = connectionString;
         }
 
         public void AddAccount(Account account)
