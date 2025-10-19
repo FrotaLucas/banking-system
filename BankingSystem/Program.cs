@@ -1,4 +1,4 @@
-namespace BankingSystem
+namespace BankingSystem.Winforms
 {
     internal static class Program
     {

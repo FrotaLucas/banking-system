@@ -1,4 +1,4 @@
-namespace BankingSystem
+namespace BankingSystem.Winforms
 {
     public partial class Form1 : Form
     {
