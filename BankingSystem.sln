@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Winforms", "BankingSystem\BankingSystem.Winforms.csproj", "{01CF06EF-9C5A-47A8-A5A6-789173338796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{99517805-D584-430D-8BB5-AE984E155E48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystme.ClassLibrary", "ClassLibrary1\BankingSystme.ClassLibrary.csproj", "{99517805-D584-430D-8BB5-AE984E155E48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
