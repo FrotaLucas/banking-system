@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
 using BankingSystem.Domain.Entities;
 using BankingSystem.Domain.Interfaces.IRepositories;
 
@@ -15,12 +16,25 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public void AddAccount(Account account)
         {
-           
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                string sql = @"INSERT INTO Accounts (AccountNumber, CustomerId, OpeningBalance)
+                           VALUES (@AccountNumber, @CustomerId, @OpeningBalance)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@AccountNumber", account.AccountNumber);
+                    cmd.Parameters.AddWithValue("@CustomerId", account.CustomerId);
+                    cmd.Parameters.AddWithValue("@OpeningBalance", account.OpeningBalance);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Account> GetAccounts()
         {
-            throw NotImplementedException();
+            return new List<Account>(); 
         }
     }
 }
