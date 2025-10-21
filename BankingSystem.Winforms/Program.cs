@@ -8,22 +8,15 @@ namespace BankingSystem.Winforms
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            //string connString = "Data Source=.;Initial Catalog=BankDB;Integrated Security=True";
-          
             string connString = "Server=FROTAPC; Database=bank_system_db; Trusted_Connection=True; TrustServerCertificate=True";
 
-            // 🔹 Inicializa banco e dataset
             var db = new DbInitializer(connString);
             db.InitializeDatabase();
             BankDataSet dataSet = db.LoadInitialData();
 
-            // 🔹 Cria conexão SQL
             using SqlConnection connection = new SqlConnection(connString);
 
             // 🔹 Inicializa os repositórios
