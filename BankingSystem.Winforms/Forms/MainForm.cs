@@ -16,11 +16,6 @@ namespace BankingSystem.Winforms.Forms
            
         }
 
-        private void btnTestGetCustomers_Click(object sender, EventArgs e)
-        {
-            DataTable dt = _customerRepo.GetAll();
-        }
-
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             //new CustomerForm(_customerRepo).ShowDialog();
