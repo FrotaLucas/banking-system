@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class AccountForm : Form
     {
-        public AccountForm()
+        private readonly IAccountRepository accountRepo;
+        public AccountForm(IAccountRepository accountRepo)
         {
             InitializeComponent();
+            this.accountRepo = accountRepo;
         }
     }
 }
