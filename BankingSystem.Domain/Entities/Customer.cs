@@ -4,7 +4,7 @@ namespace BankingSystem.Domain.Entities
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; } = default!;
         
@@ -12,11 +12,11 @@ namespace BankingSystem.Domain.Entities
         
         public string Street { get; set; } = default!;
 
-        public string HouseNumber { get; set; } = default!;;
+        public string HouseNumber { get; set; } = default!;
         
-        public string ZipCode { get; set; } = default!;;
+        public string ZipCode { get; set; } = default!;
         
-        public string City { get; set; } = default!;;
+        public string City { get; set; } = default!;
 
         public string Phone { get; set; } = default!;
         

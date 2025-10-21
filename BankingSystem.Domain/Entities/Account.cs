@@ -2,10 +2,14 @@
 {
     public class Account
     {
-        public int AccountId { get; set; }
-        public string AccountNumber { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
-        public decimal OpeningBalance { get; set; }
+        public string AccountNumber { get; set; } = default!;
+        public decimal Balance { get; set; }
+
+
+        //opcional
+        //Customer Customer { get; set; } 
 
         //public decimal CurrentBalance { get; set; } pq ????
     }
