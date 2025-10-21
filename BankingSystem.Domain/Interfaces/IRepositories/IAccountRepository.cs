@@ -2,8 +2,8 @@
 
 namespace BankingSystem.Domain.Interfaces.IRepositories
 {
-    public interface IRepositoryCustomer
+    public interface IAccountRepository
     {
-        List<Customer> getCustomers();
+        List<Account> GetAccounts();    
     }
 }
