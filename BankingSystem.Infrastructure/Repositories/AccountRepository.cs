@@ -1,11 +1,11 @@
-﻿using System.Data.SqlClient;
-using System.Diagnostics.Metrics;
+﻿using System.Diagnostics.Metrics;
 using BankingSystem.Domain.Entities;
 using BankingSystem.Domain.Interfaces.IRepositories;
+using Microsoft.Data.SqlClient;
 
 namespace BankingSystem.Infrastructure.Repositories
 {
-    public class AccountRepository : IRepositoryAccount
+    public class AccountRepository : IAccountRepository
     {
         private readonly string _connectionString;
 
@@ -26,7 +26,7 @@ namespace BankingSystem.Infrastructure.Repositories
                 {
                     cmd.Parameters.AddWithValue("@AccountNumber", account.AccountNumber);
                     cmd.Parameters.AddWithValue("@CustomerId", account.CustomerId);
-                    cmd.Parameters.AddWithValue("@OpeningBalance", account.OpeningBalance);
+                    cmd.Parameters.AddWithValue("@OpeningBalance", account.Balance);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -34,7 +34,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public List<Account> GetAccounts()
         {
-            return new List<Account>(); 
+            return new List<Account>();
         }
     }
 }

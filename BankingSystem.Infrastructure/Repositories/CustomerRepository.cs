@@ -1,25 +1,40 @@
-﻿using BankingSystem.Domain.Entities;
+﻿using System.Data;
+using BankingSystem.Domain.Entities;
 using BankingSystem.Domain.Interfaces.IRepositories;
+using Microsoft.Data.SqlClient;
 
 namespace BankingSystem.Infrastructure.Repositories
 {
-    public class CustomerRepository : IRepositoryAccount
+    public class CustomerRepository : ICustomerRepository
     {
-        private readonly string _connectionString;
+        private readonly SqlDataAdapter _adapter;
+        private readonly BankDataSet _dataSet;
 
-        public CustomerRepository(string connectionString)
+        public CustomerRepository(SqlConnection connection, BankDataSet dataSet)
         {
-            _connectionString = connectionString;
+            _dataSet = dataSet;
+            _adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
+            new SqlCommandBuilder(_adapter);
         }
 
-        public void AddAccount(Account account)
+        public DataTable GetAll() => _dataSet.Customers;
+
+        //FAZ SENTIDO RETORNAR LISTA DE CUSTOMER?
+        public List<Customer> getCustomers()
         {
             throw new NotImplementedException();
         }
 
-        public List<Account> GetAccounts()
+        public void Add(string firstName, string lastName, string email)
         {
-            throw new NotImplementedException();
+            var row = _dataSet.Customers.NewRow();
+            row["FirstName"] = firstName;
+            row["LastName"] = lastName;
+            row["Email"] = email;
+            _dataSet.Customers.Rows.Add(row);
+            _adapter.Update(_dataSet, "Customers");
         }
+
     }
+
 }
