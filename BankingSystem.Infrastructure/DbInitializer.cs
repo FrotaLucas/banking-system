@@ -5,13 +5,16 @@ public class DbInitializer
 {
     private readonly string _connectionString;
 
+
     public DbInitializer(string connectionString)
     {
         _connectionString = connectionString;
+
     }
 
     public void InitializeDatabase()
     {
+
         using (var connection = new SqlConnection(_connectionString))
         {
             connection.Open();
@@ -23,6 +26,7 @@ public class DbInitializer
                     Id INT IDENTITY PRIMARY KEY,
                     FirstName NVARCHAR(50),
                     LastName NVARCHAR(50),
+                    Street NVARCHAR(50),
                     HouseNumber NVARCHAR(50),
                     ZipCode NVARCHAR(50),
                     City NVARCHAR(50),
@@ -39,7 +43,7 @@ public class DbInitializer
                     CustomerId INT,
                     AccountNumber NVARCHAR(20),
                     Balance DECIMAL(18,2),
-                    FOREIGN KEY(CustomerId) REFERENCES Customers(CustomerId)
+                    FOREIGN KEY(CustomerId) REFERENCES Customers(Id)
                 );";
             new SqlCommand(createAccounts, connection).ExecuteNonQuery();
 
