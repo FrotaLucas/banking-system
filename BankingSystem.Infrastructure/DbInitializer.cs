@@ -1,4 +1,5 @@
-﻿using BankingSystem.Infrastructure;
+﻿using System.Data;
+using BankingSystem.Infrastructure;
 using Microsoft.Data.SqlClient; // para BankDataSet
 
 public class DbInitializer
@@ -66,15 +67,26 @@ public class DbInitializer
     public BankDataSet LoadInitialData()
     {
         var ds = new BankDataSet();
+
         using (var connection = new SqlConnection(_connectionString))
         {
             connection.Open();
 
-            // O nome aqui deve ser o nome da tabela no DataSet
-            new SqlDataAdapter("SELECT * FROM Customers", connection).Fill(ds, "Customers");
-            new SqlDataAdapter("SELECT * FROM Accounts", connection).Fill(ds, "Accounts");
-            //new SqlDataAdapter("SELECT * FROM Transactions", connection).Fill(ds, "Transactions");
+            var customerAdapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
+            customerAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            customerAdapter.Fill(ds, "Customers");
+
+            var accountAdapter = new SqlDataAdapter("SELECT * FROM Accounts", connection);
+            accountAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            accountAdapter.Fill(ds, "Accounts");
         }
+
+        if (ds.Customers.Columns.Contains("Id"))
+            ds.Customers.PrimaryKey = new DataColumn[] { ds.Customers.Columns["Id"] };
+
+        if (ds.Accounts.Columns.Contains("Id"))
+            ds.Accounts.PrimaryKey = new DataColumn[] { ds.Accounts.Columns["Id"] };
+
         return ds;
     }
 }
