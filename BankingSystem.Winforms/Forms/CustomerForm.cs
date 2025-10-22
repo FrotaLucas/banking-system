@@ -69,6 +69,8 @@ namespace BankingSystem.Winforms.Forms
                 _customerRepo.Delete(customerId);
 
                 MessageBox.Show($"Customer deleted successfully");
+
+                LoadCustomers();
             }
         }
 
