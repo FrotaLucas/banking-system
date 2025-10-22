@@ -41,6 +41,25 @@ namespace BankingSystem.Infrastructure.Repositories
             _adapter.Update(_dataSet, "Customers");
         }
 
+        public void Delete(int customerId)
+        {
+            if (customerId <= 0)
+                return;
+
+            if(customerId > 0)
+            {
+                var row = _dataSet.Customers.Rows
+                    .Cast<DataRow>()
+                    .FirstOrDefault(r => (int)r["Id"] == customerId );
+
+                if( row != null )
+                {
+                    row.Delete();
+                    _adapter.Update(_dataSet, "Customers");
+                }
+
+            }
+        }
     }
 
 }
