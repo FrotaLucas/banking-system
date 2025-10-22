@@ -2,38 +2,51 @@
 {
     partial class CustomerEditForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private TextBox txtFirstName;
+        private TextBox txtLastName;
+        private TextBox txtStreet;
+        private TextBox txtCity;
+        private TextBox txtEmail;
+        private TextBox txtPhone;
+        private Button btnSave;
+        private Label lblTitle;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "CustomerEditForm";
-        }
+            this.txtFirstName = new TextBox() { PlaceholderText = "First Name", Dock = DockStyle.Top, Margin = new Padding(5) };
+            this.txtLastName = new TextBox() { PlaceholderText = "Last Name", Dock = DockStyle.Top };
+            this.txtStreet = new TextBox() { PlaceholderText = "Street", Dock = DockStyle.Top };
+            this.txtCity = new TextBox() { PlaceholderText = "City", Dock = DockStyle.Top };
+            this.txtEmail = new TextBox() { PlaceholderText = "Email", Dock = DockStyle.Top };
+            this.txtPhone = new TextBox() { PlaceholderText = "Phone", Dock = DockStyle.Top };
+            this.btnSave = new Button() { Text = "Save", Dock = DockStyle.Bottom, Height = 40 };
+            this.lblTitle = new Label()
+            {
+                Text = "Add New Customer",
+                Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold),
+                Dock = DockStyle.Top,
+                Height = 50,
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            };
 
-        #endregion
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+
+            this.Controls.AddRange(new Control[] {
+                txtPhone, txtEmail, txtCity, txtStreet, txtLastName, txtFirstName, lblTitle, btnSave
+            });
+
+            this.ClientSize = new System.Drawing.Size(400, 400);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.Text = "Add Customer";
+        }
     }
 }
