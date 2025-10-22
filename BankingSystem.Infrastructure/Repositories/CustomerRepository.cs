@@ -25,12 +25,13 @@ namespace BankingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public void Add(string firstName, string lastName, string email)
+        //Deveria retornar Customer
+        public void Add(Customer customer)
         {
             var row = _dataSet.Customers.NewRow();
-            row["FirstName"] = firstName;
-            row["LastName"] = lastName;
-            row["Email"] = email;
+            row["FirstName"] = customer.FirstName;
+            row["LastName"] = customer.LastName;
+            row["Email"] = customer.Email;
             _dataSet.Customers.Rows.Add(row);
             _adapter.Update(_dataSet, "Customers");
         }

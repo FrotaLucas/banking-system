@@ -8,5 +8,7 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
         List<Customer> getCustomers();
 
         DataTable GetAll();
+
+        void Add(Customer customer);    
     }
 }
