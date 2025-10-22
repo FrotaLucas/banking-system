@@ -23,9 +23,9 @@ namespace BankingSystem.Winforms.Forms
                 DataTable customers = _customerRepo.GetAll();
                 dgvCustomers.DataSource = customers;
 
-                //if (dgvCustomers.Columns["colEdit"] == null)
+                if (dgvCustomers.Columns["colEdit"] == null)
                     dgvCustomers.Columns.Add(colEdit);
-                //if (dgvCustomers.Columns["colDelete"] == null)
+                if (dgvCustomers.Columns["colDelete"] == null)
                     dgvCustomers.Columns.Add(colDelete);
             }
             catch (Exception ex)
