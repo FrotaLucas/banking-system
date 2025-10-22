@@ -11,6 +11,9 @@
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Label lblTitle;
 
+
+        private System.Windows.Forms.Button btnAddCustomer;
+
         /// <summary>
         /// Clean up resources.
         /// </summary>
@@ -31,6 +34,7 @@
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
             this.btnReload = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnAddCustomer = new System.Windows.Forms.Button();
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
@@ -40,7 +44,6 @@
             // 
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(800, 40);
             this.lblTitle.TabIndex = 0;
@@ -52,13 +55,25 @@
             // 
             this.btnReload.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnReload.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnReload.Location = new System.Drawing.Point(0, 40);
+            //this.btnReload.Location = new System.Drawing.Point(0, 40);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(800, 35);
             this.btnReload.TabIndex = 1;
             this.btnReload.Text = "Reload";
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+
+            // 
+            // btnAddCustomer
+            // 
+            this.btnAddCustomer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAddCustomer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAddCustomer.Name = "btnAddCustomer";
+            this.btnAddCustomer.Size = new System.Drawing.Size(800, 35);
+            this.btnAddCustomer.TabIndex = 2;
+            this.btnAddCustomer.Text = "Add Customer";
+            this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
 
             // 
             // dgvCustomers
@@ -68,13 +83,12 @@
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCustomers.Location = new System.Drawing.Point(0, 75);
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.ReadOnly = true;
             this.dgvCustomers.RowHeadersVisible = false;
             this.dgvCustomers.RowTemplate.Height = 25;
-            this.dgvCustomers.Size = new System.Drawing.Size(800, 375);
-            this.dgvCustomers.TabIndex = 2;
+            this.dgvCustomers.Size = new System.Drawing.Size(800, 35);
+            this.dgvCustomers.TabIndex = 3;
 
             // 
             // CustomerForm
@@ -83,6 +97,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvCustomers);
+            this.Controls.Add(this.btnAddCustomer);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

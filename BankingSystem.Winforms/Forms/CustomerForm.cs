@@ -44,5 +44,16 @@ namespace BankingSystem.Winforms.Forms
         {
             LoadCustomers();
         }
+
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            using var form = new CustomerEditForm(_customerRepo);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                LoadCustomers(); 
+            }
+        }
+
     }
 }
