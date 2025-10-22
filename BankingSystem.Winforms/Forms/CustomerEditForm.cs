@@ -22,6 +22,8 @@ namespace BankingSystem.Winforms.Forms
                     FirstName = txtFirstName.Text.Trim(),
                     LastName = txtLastName.Text.Trim(),
                     Street = txtStreet.Text.Trim(),
+                    HouseNumber = txtHouseNumber.Text.Trim(),
+                    ZipCode = txtZipCode.Text.Trim(),
                     City = txtCity.Text.Trim(),
                     Email = txtEmail.Text.Trim(),
                     Phone = txtPhone.Text.Trim(),
