@@ -31,7 +31,6 @@ namespace BankingSystem.Infrastructure.Repositories
             var row = _dataSet.Customers.NewRow();
             row["FirstName"] = customer.FirstName;
             row["LastName"] = customer.LastName;
-            row["Streer"] = customer.LastName;
             row["Street"] = customer.LastName;
             row["HouseNumber"] = customer.LastName;
             row["ZipCode"] = customer.LastName;
