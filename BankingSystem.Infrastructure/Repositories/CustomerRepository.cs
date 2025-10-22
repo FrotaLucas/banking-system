@@ -31,6 +31,12 @@ namespace BankingSystem.Infrastructure.Repositories
             var row = _dataSet.Customers.NewRow();
             row["FirstName"] = customer.FirstName;
             row["LastName"] = customer.LastName;
+            row["Streer"] = customer.LastName;
+            row["Street"] = customer.LastName;
+            row["HouseNumber"] = customer.LastName;
+            row["ZipCode"] = customer.LastName;
+            row["City"] = customer.LastName;
+            row["Phone"] = customer.LastName;
             row["Email"] = customer.Email;
             _dataSet.Customers.Rows.Add(row);
             _adapter.Update(_dataSet, "Customers");
