@@ -66,7 +66,9 @@ namespace BankingSystem.Winforms.Forms
             else if (dgvCustomers.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
-                MessageBox.Show($"Excluir cliente ID {customerId}");
+                _customerRepo.Delete(customerId);
+
+                MessageBox.Show($"Customer deleted successfully");
             }
         }
 
