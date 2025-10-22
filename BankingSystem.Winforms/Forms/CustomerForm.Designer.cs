@@ -10,7 +10,8 @@
         private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Label lblTitle;
-
+        private System.Windows.Forms.DataGridViewButtonColumn colEdit;
+        private System.Windows.Forms.DataGridViewButtonColumn colDelete;
 
         private System.Windows.Forms.Button btnAddCustomer;
 
@@ -35,6 +36,8 @@
             this.btnReload = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnAddCustomer = new System.Windows.Forms.Button();
+            this.colEdit = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colDelete = new System.Windows.Forms.DataGridViewButtonColumn();
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +92,25 @@
             this.dgvCustomers.RowTemplate.Height = 25;
             this.dgvCustomers.Size = new System.Drawing.Size(800, 35);
             this.dgvCustomers.TabIndex = 3;
+            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.btnCustomerUpdate_Click);
+
+            // 
+            // colEdit
+            // 
+            this.colEdit.HeaderText = "Edit";
+            this.colEdit.Name = "colEdit";
+            this.colEdit.Text = "Edit";
+            this.colEdit.UseColumnTextForButtonValue = true;
+            this.colEdit.ReadOnly = true;
+
+            // 
+            // colDelete
+            // 
+            this.colDelete.HeaderText = "Delete";
+            this.colDelete.Name = "colDelete";
+            this.colDelete.Text = "Delete";
+            this.colDelete.UseColumnTextForButtonValue = true;
+            this.colDelete.ReadOnly = true;
 
             // 
             // CustomerForm

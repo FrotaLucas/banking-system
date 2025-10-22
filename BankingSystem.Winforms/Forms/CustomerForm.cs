@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.Data;
 using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
@@ -14,19 +12,21 @@ namespace BankingSystem.Winforms.Forms
             InitializeComponent();
             _customerRepo = customerRepo;
 
-            // Carrega os dados na inicialização
             LoadCustomers();
         }
 
-        /// <summary>
-        /// Carrega os dados de clientes no DataGridView.
-        /// </summary>
+   
         private void LoadCustomers()
         {
             try
             {
                 DataTable customers = _customerRepo.GetAll();
                 dgvCustomers.DataSource = customers;
+
+                //if (dgvCustomers.Columns["colEdit"] == null)
+                    dgvCustomers.Columns.Add(colEdit);
+                //if (dgvCustomers.Columns["colDelete"] == null)
+                    dgvCustomers.Columns.Add(colDelete);
             }
             catch (Exception ex)
             {
@@ -37,9 +37,6 @@ namespace BankingSystem.Winforms.Forms
             }
         }
 
-        /// <summary>
-        /// Evento do botão Reload.
-        /// </summary>
         private void btnReload_Click(object sender, EventArgs e)
         {
             LoadCustomers();
@@ -52,6 +49,24 @@ namespace BankingSystem.Winforms.Forms
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadCustomers(); 
+            }
+        }
+
+        private void btnCustomerUpdate_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ignora cliques no header
+            if (e.RowIndex < 0)
+                return;
+
+            if (dgvCustomers.Columns[e.ColumnIndex].Name == "colEdit")
+            {
+                var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
+                MessageBox.Show($"Editar cliente ID {customerId}");
+            }
+            else if (dgvCustomers.Columns[e.ColumnIndex].Name == "colDelete")
+            {
+                var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
+                MessageBox.Show($"Excluir cliente ID {customerId}");
             }
         }
 
