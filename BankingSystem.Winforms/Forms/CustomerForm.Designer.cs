@@ -102,7 +102,6 @@
             this.colEdit.Text = "Edit";
             this.colEdit.UseColumnTextForButtonValue = true;
             this.colEdit.ReadOnly = true;
-
             // 
             // colDelete
             // 
