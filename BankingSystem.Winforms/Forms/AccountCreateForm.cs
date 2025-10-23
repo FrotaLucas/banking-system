@@ -1,4 +1,5 @@
-﻿using BankingSystem.Domain.Interfaces.IRepositories;
+﻿using BankingSystem.Domain.Entities;
+using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {
@@ -13,6 +14,36 @@ namespace BankingSystem.Winforms.Forms
             _repo = repo;
         }
 
-        private void btnSave_Click(object sender, EventArgs e) { }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var customer = new Customer
+                {
+                    FirstName = txtFirstName.Text.Trim(),
+                    LastName = txtLastName.Text.Trim(),
+                    Street = txtStreet.Text.Trim(),
+                    HouseNumber = txtHouseNumber.Text.Trim(),
+                    ZipCode = txtZipCode.Text.Trim(),
+                    City = txtCity.Text.Trim(),
+                    Phone = txtPhone.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                };
+
+                decimal balance = Decimal.Parse(txtBalance.Text.Trim());
+
+                _repo.Add(customer, balance);
+
+                MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error trying to create an account: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }
