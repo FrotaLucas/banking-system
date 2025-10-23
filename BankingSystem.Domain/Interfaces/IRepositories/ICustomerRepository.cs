@@ -5,12 +5,12 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
 {
     public interface ICustomerRepository
     {
-        List<Customer> getCustomers();
-
         DataTable GetAll();
 
         void Add(Customer customer);
 
         void Delete(int customerId);
+
+        void Update(Customer customer); 
     }
 }

@@ -15,17 +15,11 @@ namespace BankingSystem.Infrastructure.Repositories
             _dataSet = dataSet;
             _adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
             new SqlCommandBuilder(_adapter);
+
         }
 
         public DataTable GetAll() => _dataSet.Customers;
 
-        //FAZ SENTIDO RETORNAR LISTA DE CUSTOMER?
-        public List<Customer> getCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
-        //Deveria retornar Customer
         public void Add(Customer customer)
         {
             var row = _dataSet.Customers.NewRow();
@@ -37,8 +31,10 @@ namespace BankingSystem.Infrastructure.Repositories
             row["City"] = customer.City;
             row["Phone"] = customer.Phone;
             row["Email"] = customer.Email;
+
             _dataSet.Customers.Rows.Add(row);
             _adapter.Update(_dataSet, "Customers");
+
         }
 
         public void Delete(int customerId)
@@ -54,12 +50,39 @@ namespace BankingSystem.Infrastructure.Repositories
 
                 if( row != null )
                 {
+                    //_dataSet.Customers.Rows.Remove( row );
                     row.Delete();
                     _adapter.Update(_dataSet, "Customers");
                 }
 
             }
         }
+
+        public void Update(Customer customer)
+        {
+            if (customer == null || customer.Id <= 0)
+                throw new ArgumentException("Invalid customer");
+
+            // Procura a linha pelo Id
+            var row = _dataSet.Customers.Rows
+                .Cast<DataRow>()
+                .FirstOrDefault(r => (int)r["Id"] == customer.Id);
+
+            if (row == null)
+                throw new InvalidOperationException($"Customer with Id {customer.Id} not found");
+
+            row["FirstName"] = customer.FirstName;
+            row["LastName"] = customer.LastName;
+            row["Street"] = customer.Street;
+            row["HouseNumber"] = customer.HouseNumber;
+            row["ZipCode"] = customer.ZipCode;
+            row["City"] = customer.City;
+            row["Phone"] = customer.Phone;
+            row["Email"] = customer.Email;
+
+            _adapter.Update(_dataSet, "Customers");
+        }
+
     }
 
 }
