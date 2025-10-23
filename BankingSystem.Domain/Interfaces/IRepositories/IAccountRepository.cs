@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using BankingSystem.Domain.Entities;
 
 namespace BankingSystem.Domain.Interfaces.IRepositories
 {
@@ -7,5 +8,7 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
         DataTable GetAll();    
 
         void Delete(int id);    
+
+        void Add(Customer customer, decimal balance);
     }
 }
