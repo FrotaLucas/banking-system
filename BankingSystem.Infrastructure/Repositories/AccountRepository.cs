@@ -22,10 +22,6 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public DataTable GetAll() => _dataSet.Accounts;
 
-        public List<Account> GetAccounts()
-        {
-            return new List<Account>();
-        }
 
         public void AddAccount(Account account)
         {
