@@ -49,7 +49,8 @@
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(800, 60);
+            this.tabControlMain.Size = new System.Drawing.Size(1800, 80);
+            this.tabControlMain.ItemSize = new System.Drawing.Size(900, 40);
             this.tabControlMain.TabIndex = 0;
             this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.TabControlMain_SelectedIndexChanged);
             // 

@@ -1,5 +1,4 @@
-﻿using System.Data;
-using BankingSystem.Domain.Interfaces.IRepositories;
+﻿using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {
@@ -57,17 +56,6 @@ namespace BankingSystem.Winforms.Forms
 
             panelContent.Controls.Add(_accountForm);
             _accountForm.Show();
-        }
-
-
-        private void btnCustomers_Click(object sender, EventArgs e)
-        {
-            //new CustomerForm(_customerRepo).ShowDialog();
-        }
-
-        private void btnAccounts_Click(object sender, EventArgs e)
-        {
-            //new AccountForm(_accountRepo).ShowDialog();
         }
     }
 }
