@@ -12,5 +12,7 @@ namespace BankingSystem.Winforms.Forms
             InitializeComponent();
             _repo = repo;
         }
+
+        private void btnSave_Click(object sender, EventArgs e) { }
     }
 }
