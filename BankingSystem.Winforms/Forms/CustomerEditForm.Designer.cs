@@ -32,14 +32,7 @@
             this.txtPhone = new TextBox() { PlaceholderText = "Phone", Dock = DockStyle.Top };
             this.txtEmail = new TextBox() { PlaceholderText = "Email", Dock = DockStyle.Top };
             this.btnSave = new Button() { Text = "Save", Dock = DockStyle.Bottom, Height = 40 };
-            this.lblTitle = new Label()
-            {
-                Text = "Add New Customer",
-                Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold),
-                Dock = DockStyle.Top,
-                Height = 50,
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-            };
+            this.lblTitle = new Label() {Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold), Dock = DockStyle.Top, Height = 50};
 
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
 
@@ -50,7 +43,6 @@
             this.ClientSize = new System.Drawing.Size(400, 400);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.StartPosition = FormStartPosition.CenterParent;
-            this.Text = "Add Customer";
         }
     }
 }
