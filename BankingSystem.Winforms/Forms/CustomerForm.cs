@@ -15,7 +15,6 @@ namespace BankingSystem.Winforms.Forms
             LoadCustomers();
         }
 
-   
         private void LoadCustomers()
         {
             try
@@ -42,7 +41,6 @@ namespace BankingSystem.Winforms.Forms
             LoadCustomers();
         }
 
-
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
             using var form = new CustomerEditForm(_customerRepo);
@@ -54,23 +52,30 @@ namespace BankingSystem.Winforms.Forms
 
         private void btnCustomerUpdate_Click(object sender, DataGridViewCellEventArgs e)
         {
-            // Ignora cliques no header
             if (e.RowIndex < 0)
                 return;
 
+            var dataRowView = (DataRowView)dgvCustomers.Rows[e.RowIndex].DataBoundItem;
+            DataRow customerDataRow = dataRowView.Row;
+
             if (dgvCustomers.Columns[e.ColumnIndex].Name == "colEdit")
             {
-                var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
-                MessageBox.Show($"Editar cliente ID {customerId}");
+                using (var form = new CustomerEditForm(_customerRepo, customerDataRow))
+                {
+                    if (form.ShowDialog() == DialogResult.OK)
+                        MessageBox.Show("Customer updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
+
             else if (dgvCustomers.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
                 _customerRepo.Delete(customerId);
-
+                
                 MessageBox.Show($"Customer deleted successfully");
 
-                LoadCustomers();
+                //LoadCustomers();
             }
         }
 
