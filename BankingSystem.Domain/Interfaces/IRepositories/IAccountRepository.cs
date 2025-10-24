@@ -6,6 +6,8 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
     public interface IAccountRepository
     {
         DataTable GetTableAccount();    
+        
+        List<Account> GetAccountsByCustomerId(int customerId);    
 
         void DeleteAccount(int id);    
 

@@ -9,7 +9,7 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
 
         int AddNewCustomer(Customer customer);
 
-        void DeleteCustomer(int customerId);
+        bool DeleteCustomer(int customerId);
 
         void UpdateCustomer(Customer customer); 
     }
