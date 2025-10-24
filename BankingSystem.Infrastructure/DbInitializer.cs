@@ -36,7 +36,7 @@ public class DbInitializer
                 );";
             new SqlCommand(createCustomers, connection).ExecuteNonQuery();
 
-            // Accounts
+            // Accounts  ATENCAO                     AccountNumber deve ser 30 para receber o tamanho da string NVARCHAR(30) 
             string createAccounts = @"
                 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Accounts' and xtype='U')
                 CREATE TABLE Accounts (
