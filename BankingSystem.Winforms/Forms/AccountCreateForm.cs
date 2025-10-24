@@ -30,7 +30,7 @@ namespace BankingSystem.Winforms.Forms
                     Email = txtEmail.Text.Trim(),
                 };
 
-                decimal balance = Decimal.Parse(txtBalance.Text.Trim());
+                decimal balance = (string.IsNullOrWhiteSpace(txtBalance.Text)) ? 0.00m : Decimal.Parse(txtBalance.Text);   
 
                 _repo.AddNewAccount(customer, balance);
 
