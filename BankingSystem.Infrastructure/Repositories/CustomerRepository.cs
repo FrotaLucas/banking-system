@@ -8,14 +8,17 @@ namespace BankingSystem.Infrastructure.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly SqlDataAdapter _adapter;
+
         private readonly BankDataSet _dataSet;
+
+        //private readonly IAccountRepository _accountRepository;
 
         public CustomerRepository(SqlConnection connection, BankDataSet dataSet)
         {
             _dataSet = dataSet;
             _adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
             new SqlCommandBuilder(_adapter);
-
+            //_accountRepository = accountRepository;
         }
 
         public DataTable GetTableCustomer() => _dataSet.Customers;
@@ -40,24 +43,30 @@ namespace BankingSystem.Infrastructure.Repositories
             return Id;
         }
 
-        public void DeleteCustomer(int customerId)
+        public bool DeleteCustomer(int customerId)
         {
+            //GARANTIR ANTES QUE NUNCA VENHA -1 !!
             if (customerId <= 0)
-                return;
+                return false;
 
-            if (customerId > 0)
+            //List<Account> accountsOfCustomer = _accountRepository.GetAccountsByCustomerId(customerId);
+            //decimal totalBalance = accountsOfCustomer.Sum(x => x.Balance);
+            //if (totalBalance > 0)
+            //    return false;
+
+
+            var row = _dataSet.Customers.Rows
+                .Cast<DataRow>()
+                .FirstOrDefault(r => (int)r["Id"] == customerId);
+
+            if (row != null)
             {
-                var row = _dataSet.Customers.Rows
-                    .Cast<DataRow>()
-                    .FirstOrDefault(r => (int)r["Id"] == customerId);
-
-                if (row != null)
-                {
-                    //_dataSet.Customers.Rows.Remove( row );
-                    row.Delete();
-                    _adapter.Update(_dataSet, "Customers");
-                }
+                //_dataSet.Customers.Rows.Remove( row );
+                row.Delete();
+                _adapter.Update(_dataSet, "Customers");
             }
+
+            return true;
         }
 
         public void UpdateCustomer(Customer customer)
