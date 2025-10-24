@@ -16,6 +16,8 @@ namespace BankingSystem.Infrastructure.Repositories
         {
            _dataSet = dataSet;
            _adapter = new SqlDataAdapter("SELECT * FROM Accounts", connection);
+
+            var builder = new SqlCommandBuilder(_adapter);
         }
 
 
@@ -91,6 +93,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
                 customerId = Convert.ToInt32(newCustomer["Id"]);
             }
+
             else
             {
                 customerId = Convert.ToInt32(dbCustomer["Id"]);
