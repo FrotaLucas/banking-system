@@ -3,6 +3,8 @@ using BankingSystem.Infrastructure;
 using BankingSystem.Infrastructure.Repositories;
 using BankingSystem.Winforms.Forms;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BankingSystem.Winforms
 {
@@ -11,34 +13,37 @@ namespace BankingSystem.Winforms
         [STAThread]
         static void Main()
         {
-            string connString = "Server=FROTAPC; Database=bank_system_db; Trusted_Connection=True; TrustServerCertificate=True";
+            // 🔹 Carrega configurações do appsettings.json
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
 
+            string connString = configuration.GetConnectionString("DefaultConnection");
+
+            // 🔹 Inicializa banco e dados
             var db = new DbInitializer(connString);
             db.InitializeDatabase();
             BankDataSet dataSet = db.LoadInitialData();
 
-            using SqlConnection connection = new SqlConnection(connString);
+            // 🔹 Configura container de DI
+            var services = new ServiceCollection();
 
-            // 🔹 Inicializa os repositórios
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            //injetar nos construtores de CustomerRepository e AccountRepository
+            services.AddSingleton(dataSet);
+            services.AddScoped<SqlConnection>(_ => new SqlConnection(connString));
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
-            ICustomerRepository customerRepo = new CustomerRepository(connection, dataSet);
-            IAccountRepository accountRepo = new AccountRepository(connection, dataSet, customerRepo);
+            var serviceProvider = services.BuildServiceProvider();
 
-            // 🔹 Inicializa WinForms (configurações modernas de DPI, etc.)
+            // 🔹 Inicializa WinForms
             ApplicationConfiguration.Initialize();
 
-            // 🔹 Executa o form principal, injetando dependências
-            Application.Run(new MainForm(customerRepo, accountRepo));
+            // 🔹 Resolve dependências do form principal
+            var mainForm = ActivatorUtilities.CreateInstance<MainForm>(serviceProvider);
 
-
-
-
-
-
-
-
+            Application.Run(mainForm);
         }
     }
 }
