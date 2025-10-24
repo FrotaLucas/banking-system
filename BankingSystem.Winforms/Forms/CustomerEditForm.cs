@@ -59,11 +59,11 @@ namespace BankingSystem.Winforms.Forms
                 if (_dataRow != null)
                 {
                     customer.Id = Convert.ToInt32(_dataRow["Id"]);
-                    _repo.Update(customer);
+                    _repo.UpdateCustomer(customer);
                 }
                 else
                 {
-                    _repo.Add(customer);
+                    _repo.AddNewCustomer(customer);
                     MessageBox.Show("Customer added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 

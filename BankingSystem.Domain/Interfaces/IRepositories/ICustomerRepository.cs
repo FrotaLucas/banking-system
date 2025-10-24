@@ -7,10 +7,10 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
     {
         DataTable GetAll();
 
-        void Add(Customer customer);
+        void AddNewCustomer(Customer customer);
 
-        void Delete(int customerId);
+        void DeleteCustomer(int customerId);
 
-        void Update(Customer customer); 
+        void UpdateCustomer(Customer customer); 
     }
 }

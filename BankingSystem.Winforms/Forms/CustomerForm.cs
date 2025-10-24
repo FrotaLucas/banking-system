@@ -71,7 +71,7 @@ namespace BankingSystem.Winforms.Forms
             else if (dgvCustomers.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
-                _customerRepo.Delete(customerId);
+                _customerRepo.DeleteCustomer(customerId);
                 
                 MessageBox.Show($"Customer deleted successfully");
 

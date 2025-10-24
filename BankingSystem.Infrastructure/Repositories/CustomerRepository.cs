@@ -20,7 +20,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public DataTable GetAll() => _dataSet.Customers;
 
-        public void Add(Customer customer)
+        public void AddNewCustomer(Customer customer)
         {
             var row = _dataSet.Customers.NewRow();
             row["FirstName"] = customer.FirstName;
@@ -37,7 +37,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         }
 
-        public void Delete(int customerId)
+        public void DeleteCustomer(int customerId)
         {
             if (customerId <= 0)
                 return;
@@ -58,7 +58,7 @@ namespace BankingSystem.Infrastructure.Repositories
             }
         }
 
-        public void Update(Customer customer)
+        public void UpdateCustomer(Customer customer)
         {
             if (customer == null || customer.Id <= 0)
                 throw new ArgumentException("Invalid customer");
