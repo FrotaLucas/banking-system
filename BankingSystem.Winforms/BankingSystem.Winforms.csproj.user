@@ -16,6 +16,9 @@
     <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\TransactionCreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\TransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
