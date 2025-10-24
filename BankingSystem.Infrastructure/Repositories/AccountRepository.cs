@@ -22,8 +22,6 @@ namespace BankingSystem.Infrastructure.Repositories
             _customerRepository = customerRepository;
         }
 
-
-
         public DataTable GetTableAccount() => _dataSet.Accounts;
 
         private string CreateAccountNumber()
@@ -94,9 +92,24 @@ namespace BankingSystem.Infrastructure.Repositories
         }
 
 
-        public void DeleteAccount(int id)
+        public void DeleteAccount(int accountId)
         {
-            throw new NotImplementedException();
+            if (accountId <= 0)
+                return;
+
+            if (accountId > 0)
+            {
+                var row = _dataSet.Accounts.Rows
+                    .Cast<DataRow>()
+                    .FirstOrDefault(r => (int)r["Id"] == accountId);
+
+                if (row != null)
+                {
+                    //_dataSet.Customers.Rows.Remove( row );
+                    row.Delete();
+                    _adapter.Update(_dataSet, "Account");
+                }
+            }
         }
     }
 }
