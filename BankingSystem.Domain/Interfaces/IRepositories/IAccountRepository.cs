@@ -5,10 +5,10 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
 {
     public interface IAccountRepository
     {
-        DataTable GetAll();    
+        DataTable GetTableAccount();    
 
-        void Delete(int id);    
+        void DeleteAccount(int id);    
 
-        void Add(Customer customer, decimal balance);
+        void AddNewAccount(Customer customer, decimal balance);
     }
 }

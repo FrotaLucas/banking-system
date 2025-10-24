@@ -22,7 +22,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
 
 
-        public DataTable GetAll() => _dataSet.Accounts;
+        public DataTable GetTableAccount() => _dataSet.Accounts;
 
         private string CreateAccountNumber()
         {
@@ -61,7 +61,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         }
 
-        public void Add(Customer customer, decimal balance)
+        public void AddNewAccount(Customer customer, decimal balance)
         {
             var dbCustomer = _dataSet.Customers.Rows
                 .Cast<DataRow>()
@@ -109,7 +109,7 @@ namespace BankingSystem.Infrastructure.Repositories
         }
 
 
-        public void Delete(int id)
+        public void DeleteAccount(int id)
         {
             throw new NotImplementedException();
         }

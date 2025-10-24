@@ -32,7 +32,7 @@ namespace BankingSystem.Winforms.Forms
 
                 decimal balance = Decimal.Parse(txtBalance.Text.Trim());
 
-                _repo.Add(customer, balance);
+                _repo.AddNewAccount(customer, balance);
 
                 MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

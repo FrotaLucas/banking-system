@@ -19,7 +19,7 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                DataTable accounts = _accountRepo.GetAll();
+                DataTable accounts = _accountRepo.GetTableAccount();
                 dgvAccounts.DataSource = accounts;
 
                 if (dgvAccounts.Columns["colDelete"] == null)
@@ -63,7 +63,7 @@ namespace BankingSystem.Winforms.Forms
 
                 if (confirm == DialogResult.Yes)
                 {
-                    _accountRepo.Delete(accountId);
+                    _accountRepo.DeleteAccount(accountId);
                     MessageBox.Show("Account deleted successfully!", "Success",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAccounts();
