@@ -18,7 +18,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         }
 
-        public DataTable GetAll() => _dataSet.Customers;
+        public DataTable GetTableCustomer() => _dataSet.Customers;
 
         public void AddNewCustomer(Customer customer)
         {

@@ -5,7 +5,7 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
 {
     public interface ICustomerRepository
     {
-        DataTable GetAll();
+        DataTable GetTableCustomer();
 
         void AddNewCustomer(Customer customer);
 

@@ -19,7 +19,7 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                DataTable customers = _customerRepo.GetAll();
+                DataTable customers = _customerRepo.GetTableCustomer();
                 dgvCustomers.DataSource = customers;
 
                 if (dgvCustomers.Columns["colEdit"] == null)
