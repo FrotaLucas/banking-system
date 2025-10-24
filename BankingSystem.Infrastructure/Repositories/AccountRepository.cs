@@ -85,6 +85,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
             var accountRow = _dataSet.Accounts.NewRow();
             accountRow["CustomerId"] = customerId;
+            accountRow["CustomerName"] = $"{customer.FirstName} {customer.LastName}";
             accountRow["AccountNumber"] = CreateAccountNumber();
             accountRow["Balance"] = balance;
 
