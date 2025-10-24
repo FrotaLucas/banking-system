@@ -70,5 +70,21 @@ namespace BankingSystem.Winforms.Forms
                 }
             }
         }
+
+        private void btnDeleteAccount_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+             if (dgvAccounts.Columns[e.ColumnIndex].Name == "colDelete")
+            {
+                var accountId = (int)dgvAccounts.Rows[e.RowIndex].Cells["Id"].Value;
+                _accountRepo.DeleteAccount(accountId);
+
+                MessageBox.Show($"Account deleted successfully");
+
+                //LoadCustomers();
+            }
+        }
     }
 }
