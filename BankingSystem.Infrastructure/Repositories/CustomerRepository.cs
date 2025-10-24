@@ -45,19 +45,18 @@ namespace BankingSystem.Infrastructure.Repositories
             if (customerId <= 0)
                 return;
 
-            if(customerId > 0)
+            if (customerId > 0)
             {
                 var row = _dataSet.Customers.Rows
                     .Cast<DataRow>()
-                    .FirstOrDefault(r => (int)r["Id"] == customerId );
+                    .FirstOrDefault(r => (int)r["Id"] == customerId);
 
-                if( row != null )
+                if (row != null)
                 {
                     //_dataSet.Customers.Rows.Remove( row );
                     row.Delete();
                     _adapter.Update(_dataSet, "Customers");
                 }
-
             }
         }
 
@@ -66,7 +65,6 @@ namespace BankingSystem.Infrastructure.Repositories
             if (customer == null || customer.Id <= 0)
                 throw new ArgumentException("Invalid customer");
 
-            // Procura a linha pelo Id
             var row = _dataSet.Customers.Rows
                 .Cast<DataRow>()
                 .FirstOrDefault(r => (int)r["Id"] == customer.Id);
@@ -85,7 +83,5 @@ namespace BankingSystem.Infrastructure.Repositories
 
             _adapter.Update(_dataSet, "Customers");
         }
-
     }
-
 }
