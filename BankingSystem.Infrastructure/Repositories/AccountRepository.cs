@@ -99,6 +99,8 @@ namespace BankingSystem.Infrastructure.Repositories
 
             if (accountId > 0)
             {
+
+                ///ERROR DE LOGICA. O CERTO NAO SERIA DELETAR DO BANCO DE DADOS E AI ATUALIZAR AS TABELAS????  DATASET NAO EH CONFIAVEL !!!!!!
                 var row = _dataSet.Accounts.Rows
                     .Cast<DataRow>()
                     .FirstOrDefault(r => (int)r["Id"] == accountId);
@@ -111,5 +113,53 @@ namespace BankingSystem.Infrastructure.Repositories
                 }
             }
         }
+
+
+        //METODO MAIS VERBOSO PARA IR ATE O BANCO DE DADOS, POREM MAIS CORRETO!!
+        public List<Account> GetAccountsByCustomerId(int customerId)
+        {
+            if (customerId <= 0)
+                throw new ArgumentException("Invalid customer ID.", nameof(customerId));
+
+            var accounts = new List<Account>();
+
+            using (var connection = new SqlConnection(_adapter.SelectCommand.Connection.ConnectionString))
+            {
+                const string query = @"
+            SELECT 
+                Id,
+                CustomerId,
+                AccountNumber,
+                Balance
+            FROM Accounts
+            WHERE CustomerId = @CustomerId;
+        ";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@CustomerId", customerId);
+
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var account = new Account
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                                AccountNumber = reader.GetString(reader.GetOrdinal("AccountNumber")),
+                                Balance = reader.GetDecimal(reader.GetOrdinal("Balance"))
+                            };
+
+                            accounts.Add(account);
+                        }
+                    }
+                }
+            }
+
+            return accounts;
+        }
+
     }
 }
