@@ -20,7 +20,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public DataTable GetTableCustomer() => _dataSet.Customers;
 
-        public void AddNewCustomer(Customer customer)
+        public int AddNewCustomer(Customer customer)
         {
             var row = _dataSet.Customers.NewRow();
             row["FirstName"] = customer.FirstName;
@@ -35,6 +35,9 @@ namespace BankingSystem.Infrastructure.Repositories
             _dataSet.Customers.Rows.Add(row);
             _adapter.Update(_dataSet, "Customers");
 
+            int Id = Convert.ToInt32(row["Id"]);
+
+            return Id;
         }
 
         public void DeleteCustomer(int customerId)
