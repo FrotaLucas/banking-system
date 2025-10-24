@@ -24,7 +24,7 @@ namespace BankingSystem.Winforms
             // see https://aka.ms/applicationconfiguration.
 
             ICustomerRepository customerRepo = new CustomerRepository(connection, dataSet);
-            IAccountRepository accountRepo = new AccountRepository(connection, dataSet);
+            IAccountRepository accountRepo = new AccountRepository(connection, dataSet, customerRepo);
 
             // 🔹 Inicializa WinForms (configurações modernas de DPI, etc.)
             ApplicationConfiguration.Initialize();
