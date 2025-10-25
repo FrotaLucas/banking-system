@@ -34,6 +34,7 @@ namespace BankingSystem.Winforms
             services.AddScoped<SqlConnection>(_ => new SqlConnection(connString));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             var serviceProvider = services.BuildServiceProvider();
 
