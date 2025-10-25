@@ -11,12 +11,15 @@ namespace BankingSystem.Infrastructure.Repositories
 
         private readonly BankDataSet _dataSet;
 
+        private readonly SqlConnection _connection;
+
         //private readonly IAccountRepository _accountRepository;
 
         public CustomerRepository(SqlConnection connection, BankDataSet dataSet)
         {
+            _connection = connection;
             _dataSet = dataSet;
-            _adapter = new SqlDataAdapter("SELECT * FROM Customers", connection);
+            _adapter = new SqlDataAdapter("SELECT * FROM Customers", _connection);
             new SqlCommandBuilder(_adapter);
             //_accountRepository = accountRepository;
         }
@@ -45,29 +48,32 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public bool DeleteCustomer(int customerId)
         {
-            //GARANTIR ANTES QUE NUNCA VENHA -1 !!
             if (customerId <= 0)
                 return false;
 
-            //List<Account> accountsOfCustomer = _accountRepository.GetAccountsByCustomerId(customerId);
-            //decimal totalBalance = accountsOfCustomer.Sum(x => x.Balance);
-            //if (totalBalance > 0)
-            //    return false;
+            const string sql = "DELETE FROM Customers WHERE Id = @Id";
+            using var cmd = new SqlCommand(sql, _connection);
+            cmd.Parameters.AddWithValue("@Id", customerId);
 
+            if (_connection.State != ConnectionState.Open)
+                _connection.Open();
 
-            var row = _dataSet.Customers.Rows
-                .Cast<DataRow>()
-                .FirstOrDefault(r => (int)r["Id"] == customerId);
+            int affected = cmd.ExecuteNonQuery();
 
-            if (row != null)
+            // Atualiza DataSet apenas se o banco foi alterado
+            if (affected > 0)
             {
-                //_dataSet.Customers.Rows.Remove( row );
-                row.Delete();
-                _adapter.Update(_dataSet, "Customers");
+                var row = _dataSet.Customers.Rows
+                    .Cast<DataRow>()
+                    .FirstOrDefault(r => (int)r["Id"] == customerId);
+
+                if (row != null)
+                    row.Delete();
             }
 
-            return true;
+            return affected > 0;
         }
+
 
         public void UpdateCustomer(Customer customer)
         {
