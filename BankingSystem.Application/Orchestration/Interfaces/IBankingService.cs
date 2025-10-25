@@ -9,7 +9,7 @@ namespace BankingSystem.Application.Orchestration.Interfaces
 
         public DataTable GetTableCustomer();
 
-        public int DeleteCustomer(int customerId);
+        public bool DeleteCustomer(int customerId);
 
         public void UpdateCustomer(Customer customer);
 

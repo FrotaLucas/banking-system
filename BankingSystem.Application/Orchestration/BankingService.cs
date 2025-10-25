@@ -21,24 +21,42 @@ namespace BankingSystem.Application.Orchestration
         }
 
 
-        public public int AddNewCustomer(Customer customer)
+        public int AddNewCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var intCustomer = _customerRepository.AddNewCustomer(customer);
+
+            return intCustomer;
         }
 
         public DataTable GetTableCustomer()
         {
-            throw new NotImplementedException();
+            var tableCustomers = _customerRepository.GetTableCustomer();
+
+            return tableCustomers;
         }
 
-        public int DeleteCustomer(int customerId)
+        //verificar se frontend mostra msg quando nao deleta nada !!!
+        public bool DeleteCustomer(int customerId)
         {
-            throw new NotImplementedException();
+            if (customerId <= 0)
+                return false;
+
+            List<Account> accountsOfCustomer = _accountRepository.GetAccountsByCustomerId(customerId);
+
+            if (accountsOfCustomer.Count == 0 || accountsOfCustomer == null)
+                return _customerRepository.DeleteCustomer(customerId);
+
+            var totalBalance = accountsOfCustomer.Sum(account =>  account.Balance);
+
+            if (totalBalance != 0)
+                return false;
+
+            return _accountRepository.DeleteAccount(customerId);
         }
 
         public void UpdateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRepository.UpdateCustomer(customer);
         }
 
         public DataTable GetTableAccount()
