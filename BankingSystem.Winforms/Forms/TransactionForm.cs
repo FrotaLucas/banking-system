@@ -6,17 +6,13 @@ namespace BankingSystem.Winforms.Forms
     public partial class TransactionForm : Form
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IAccountRepository _accountRepository;
-        private readonly int _accountId;
 
 
-        public TransactionForm(int accountId, ITransactionRepository transactionRepository, IAccountRepository accountRepository)
+        public TransactionForm(ITransactionRepository transactionRepository)
         {
             InitializeComponent();
 
-            _accountId = accountId;
             _transactionRepository = transactionRepository;
-            _accountRepository = accountRepository;
 
             LoadTransactions();
         }
@@ -28,7 +24,7 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                DataTable transactions = _transactionRepository.GetTransactionsByAccountId();
+                //DataTable transactions = _transactionRepository.GetTransactionsByAccountId();
 
 
                 dgvTransactions.Columns.Clear();
@@ -66,7 +62,7 @@ namespace BankingSystem.Winforms.Forms
 
                 dgvTransactions.Columns.Add(colDelete);
 
-                dgvTransactions.DataSource = transactions;
+                //dgvTransactions.DataSource = transactions;
 
                 UpdateTotalBalance();
             }
@@ -111,7 +107,7 @@ namespace BankingSystem.Winforms.Forms
         /// <summary>
         /// Clique em botões dentro do DataGridView (ex: Delete).
         /// </summary>
-        private void dgvTransactions_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnDeleteTransaction_Click(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;

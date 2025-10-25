@@ -93,7 +93,7 @@
             this.dgvTransactions.RowHeadersVisible = false;
             this.dgvTransactions.RowTemplate.Height = 25;
             this.dgvTransactions.TabIndex = 4;
-            this.dgvTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTransactions_CellContentClick);
+            this.dgvTransactions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.btnDeleteTransaction_Click);
 
             // 
             // colDelete
