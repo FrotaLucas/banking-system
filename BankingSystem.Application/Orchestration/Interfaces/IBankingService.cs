@@ -15,7 +15,7 @@ namespace BankingSystem.Application.Orchestration.Interfaces
 
         public DataTable GetTableAccount();
 
-        public void AddNewAccount(Account account, decimal balance);
+        public void AddNewAccount(Customer customer, decimal balance);
 
         public bool DeleteAccount(int accountId);
 

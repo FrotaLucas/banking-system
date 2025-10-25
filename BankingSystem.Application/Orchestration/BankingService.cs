@@ -64,7 +64,7 @@ namespace BankingSystem.Application.Orchestration
             throw new NotImplementedException();
         }
 
-        public void AddNewAccount(Account account, decimal balance)
+        public void AddNewAccount(Customer customer, decimal balance)
         {
             throw new NotImplementedException();
         }
