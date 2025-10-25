@@ -13,15 +13,12 @@ namespace BankingSystem.Infrastructure.Repositories
 
         private readonly SqlConnection _connection;
 
-        //private readonly IAccountRepository _accountRepository;
-
         public CustomerRepository(SqlConnection connection, BankDataSet dataSet)
         {
             _connection = connection;
             _dataSet = dataSet;
             _adapter = new SqlDataAdapter("SELECT * FROM Customers", _connection);
             new SqlCommandBuilder(_adapter);
-            //_accountRepository = accountRepository;
         }
 
         public DataTable GetTableCustomer() => _dataSet.Customers;
@@ -48,9 +45,6 @@ namespace BankingSystem.Infrastructure.Repositories
 
         public bool DeleteCustomer(int customerId)
         {
-            if (customerId <= 0)
-                return false;
-
             const string sql = "DELETE FROM Customers WHERE Id = @Id";
             using var cmd = new SqlCommand(sql, _connection);
             cmd.Parameters.AddWithValue("@Id", customerId);
@@ -107,7 +101,6 @@ namespace BankingSystem.Infrastructure.Repositories
 
             int affected = cmd.ExecuteNonQuery();
 
-            // Sincroniza DataSet local (opcional)
             if (affected > 0)
             {
                 var row = _dataSet.Customers.Rows
