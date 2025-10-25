@@ -7,9 +7,6 @@ using BankingSystem.Winforms.Forms;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows.Forms;
-using BankingSystem.Winforms.Forms;
 
 namespace BankingSystem.Winforms
 {
