@@ -132,7 +132,7 @@ namespace BankingSystem.Infrastructure.Repositories
                 AccountNumber,
                 Balance
             FROM Accounts
-            WHERE CustomerId = @CustomerId;
+            WHERE CustomerId = @customerId;
         ";
 
                 using (var command = new SqlCommand(query, connection))

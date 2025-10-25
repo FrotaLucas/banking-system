@@ -20,6 +20,8 @@ public class DbInitializer
         {
             connection.Open();
 
+
+            //TIRAR ESSE SCRIPT PRA CRIAR TABELAS 
             // Cria tabela Customers se não existir
             string createCustomers = @"
                 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Customers' and xtype='U')
