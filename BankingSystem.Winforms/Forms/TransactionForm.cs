@@ -24,43 +24,45 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                //DataTable transactions = _transactionRepository.GetTransactionsByAccountId();
+                //v1
+                DataTable transactions = _transactionRepository.GetTableTransactions();
+                dgvTransactions.DataSource = transactions;  
+                
+                //v2 OPCAO PARA NOMEAR COLUNAS DAS TABELAS 
+                //dgvTransactions.Columns.Clear();
+                //dgvTransactions.DataSource = null;
+                //dgvTransactions.AutoGenerateColumns = false;
 
+                //// Define as colunas de exibição
+                //dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
+                //{
+                //    DataPropertyName = "Id",
+                //    HeaderText = "ID",
+                //    ReadOnly = true
+                //});
 
-                dgvTransactions.Columns.Clear();
-                dgvTransactions.DataSource = null;
-                dgvTransactions.AutoGenerateColumns = false;
+                //dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
+                //{
+                //    DataPropertyName = "Date",
+                //    HeaderText = "Date",
+                //    ReadOnly = true
+                //});
 
-                // Define as colunas de exibição
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = "Id",
-                    HeaderText = "ID",
-                    ReadOnly = true
-                });
+                //dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
+                //{
+                //    DataPropertyName = "Description",
+                //    HeaderText = "Description",
+                //    ReadOnly = true
+                //});
 
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = "Date",
-                    HeaderText = "Date",
-                    ReadOnly = true
-                });
+                //dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
+                //{
+                //    DataPropertyName = "Amount",
+                //    HeaderText = "Amount (€)",
+                //    ReadOnly = true
+                //});
 
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = "Description",
-                    HeaderText = "Description",
-                    ReadOnly = true
-                });
-
-                dgvTransactions.Columns.Add(new DataGridViewTextBoxColumn
-                {
-                    DataPropertyName = "Amount",
-                    HeaderText = "Amount (€)",
-                    ReadOnly = true
-                });
-
-                dgvTransactions.Columns.Add(colDelete);
+                //dgvTransactions.Columns.Add(colDelete);
 
                 //dgvTransactions.DataSource = transactions;
 

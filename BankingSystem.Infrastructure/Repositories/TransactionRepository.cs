@@ -30,9 +30,7 @@ namespace BankingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public DataTable GetTableTransactions()
-        {
-            throw new NotImplementedException();
-        }
+        public DataTable GetTableTransactions() => _dataSet.Transactions;
+      
     }
 }
