@@ -8,15 +8,20 @@ namespace BankingSystem.Infrastructure.Repositories
     public class AccountRepository : IAccountRepository
     {
 
+        private readonly SqlConnection _connection;
+
         private readonly SqlDataAdapter _adapter;
 
         private readonly BankDataSet _dataSet;
 
         private readonly ICustomerRepository _customerRepository;
+
+
         public AccountRepository(SqlConnection connection, BankDataSet dataSet, ICustomerRepository customerRepository)
         {
+            _connection = connection;
             _dataSet = dataSet;
-            _adapter = new SqlDataAdapter("SELECT * FROM Accounts", connection);
+            _adapter = new SqlDataAdapter("SELECT * FROM Accounts", _connection);
 
             var builder = new SqlCommandBuilder(_adapter);
             _customerRepository = customerRepository;
