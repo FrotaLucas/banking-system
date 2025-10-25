@@ -7,6 +7,6 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
     {
         void AddNewTransaction(Transaction transaction);
 
-        DataTable GetTransactionsByAccountId();
+        DataTable GetTableTransactions();
     }
 }

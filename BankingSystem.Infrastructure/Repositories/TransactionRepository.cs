@@ -30,7 +30,7 @@ namespace BankingSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public DataTable GetTransactionsByAccountId()
+        public DataTable GetTableTransactions()
         {
             throw new NotImplementedException();
         }
