@@ -9,6 +9,7 @@
         private TabControl tabControlMain;
         private TabPage tabPageCustomers;
         private TabPage tabPageAccounts;
+        private TabPage tabPageTransactions;
         private Panel panelContent;
 
 
@@ -37,6 +38,7 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageCustomers = new System.Windows.Forms.TabPage();
             this.tabPageAccounts = new System.Windows.Forms.TabPage();
+            this.tabPageTransactions = new System.Windows.Forms.TabPage();
             this.panelContent = new System.Windows.Forms.Panel();
             this.tabControlMain.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +47,7 @@
             // 
             this.tabControlMain.Controls.Add(this.tabPageCustomers);
             this.tabControlMain.Controls.Add(this.tabPageAccounts);
+            this.tabControlMain.Controls.Add(this.tabPageTransactions);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
@@ -72,7 +75,17 @@
             this.tabPageAccounts.Size = new System.Drawing.Size(792, 32);
             this.tabPageAccounts.TabIndex = 1;
             this.tabPageAccounts.Text = "Accounts";
-            this.tabPageAccounts.UseVisualStyleBackColor = true;
+            this.tabPageAccounts.UseVisualStyleBackColor = true; 
+
+            // tabPageTransactions
+            // 
+            this.tabPageTransactions.Location = new System.Drawing.Point(4, 24);
+            this.tabPageTransactions.Name = "tabPageTransactions";
+            this.tabPageTransactions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTransactions.Size = new System.Drawing.Size(792, 32);
+            this.tabPageTransactions.TabIndex = 2;
+            this.tabPageTransactions.Text = "Transactions";
+            this.tabPageTransactions.UseVisualStyleBackColor = true;
             // 
             // panelContent
             // 
@@ -80,7 +93,7 @@
             this.panelContent.Location = new System.Drawing.Point(0, 60);
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(800, 390);
-            this.panelContent.TabIndex = 1;
+            this.panelContent.TabIndex = 3;
             // 
             // MainForm
             // 
