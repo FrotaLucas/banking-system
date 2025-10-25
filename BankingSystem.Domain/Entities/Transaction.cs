@@ -4,6 +4,8 @@
     {
         int Id { get; set; }    
 
+        public int AccountId {  get; set; }
+
         public DateTime DateTime { get; set; } = DateTime.Now;
 
         public string TransactionType { get; set; } = default!;
