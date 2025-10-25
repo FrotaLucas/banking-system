@@ -9,7 +9,7 @@ namespace BankingSystem.Domain.Interfaces.IRepositories
         
         List<Account> GetAccountsByCustomerId(int customerId);    
 
-        void DeleteAccount(int id);    
+        bool DeleteAccount(int id);    
 
         void AddNewAccount(Customer customer, decimal balance);
     }

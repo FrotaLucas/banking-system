@@ -97,26 +97,31 @@ namespace BankingSystem.Infrastructure.Repositories
         }
 
 
-        public void DeleteAccount(int accountId)
+        public bool DeleteAccount(int accountId)
         {
             if (accountId <= 0)
-                return;
+                return false;
 
-            if (accountId > 0)
+            const string sql = "DELETE FROM Accounts WHERE Id = @Id";
+            using var cmd = new SqlCommand(sql, _connection);
+            cmd.Parameters.AddWithValue("@Id", accountId);
+
+            if (_connection.State != ConnectionState.Open)
+                _connection.Open();
+
+            int affected = cmd.ExecuteNonQuery();
+
+            if (affected > 0)
             {
-
-                ///ERROR DE LOGICA. O CERTO NAO SERIA DELETAR DO BANCO DE DADOS E AI ATUALIZAR AS TABELAS????  DATASET NAO EH CONFIAVEL !!!!!!
                 var row = _dataSet.Accounts.Rows
                     .Cast<DataRow>()
                     .FirstOrDefault(r => (int)r["Id"] == accountId);
 
                 if (row != null)
-                {
-                    //_dataSet.Customers.Rows.Remove( row );
                     row.Delete();
-                    _adapter.Update(_dataSet, "Account");
-                }
             }
+
+            return affected > 0;
         }
 
 
