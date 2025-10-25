@@ -1,17 +1,17 @@
-﻿using BankingSystem.Domain.Entities;
-using BankingSystem.Domain.IRepositories;
+﻿using BankingSystem.Application.Orchestration.Interfaces;
+using BankingSystem.Domain.Entities;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class AccountCreateForm : Form
     {
 
-        private readonly IAccountRepository _repo;
+        private readonly IBankingService _bankingService;
 
-        public AccountCreateForm(IAccountRepository repo)
+        public AccountCreateForm(IBankingService bankingService)
         {
             InitializeComponent();
-            _repo = repo;
+            _bankingService = bankingService;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace BankingSystem.Winforms.Forms
 
                 decimal balance = (string.IsNullOrWhiteSpace(txtBalance.Text)) ? 0.00m : Decimal.Parse(txtBalance.Text);   
 
-                _repo.AddNewAccount(customer, balance);
+                _bankingService.AddNewAccount(customer, balance);
 
                 MessageBox.Show("Account created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

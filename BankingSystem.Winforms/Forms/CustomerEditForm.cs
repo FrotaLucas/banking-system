@@ -1,24 +1,24 @@
 ﻿using System.Data;
+using BankingSystem.Application.Orchestration.Interfaces;
 using BankingSystem.Domain.Entities;
-using BankingSystem.Domain.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class CustomerEditForm : Form
     {
-        private readonly ICustomerRepository _repo;
+        private readonly IBankingService _bankingService;
         private readonly DataRow? _dataRow;
 
-        public CustomerEditForm(ICustomerRepository repo)
+        public CustomerEditForm(IBankingService bankingService)
         {
             InitializeComponent();
-            _repo = repo;
+            _bankingService = bankingService;
 
             lblTitle.Text = "Add new customer";
             this.Text = "Add Customer";
         }
 
-        public CustomerEditForm(ICustomerRepository repo, DataRow dataRow) : this(repo)
+        public CustomerEditForm(IBankingService bankingService, DataRow dataRow) : this(bankingService)
         {
             _dataRow = dataRow;
             lblTitle.Text = "Edit customer";
@@ -59,11 +59,11 @@ namespace BankingSystem.Winforms.Forms
                 if (_dataRow != null)
                 {
                     customer.Id = Convert.ToInt32(_dataRow["Id"]);
-                    _repo.UpdateCustomer(customer);
+                    _bankingService.UpdateCustomer(customer);
                 }
                 else
                 {
-                    _repo.AddNewCustomer(customer);
+                    _bankingService.AddNewCustomer(customer);
                     MessageBox.Show("Customer added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 

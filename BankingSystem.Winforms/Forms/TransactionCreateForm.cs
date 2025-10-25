@@ -1,15 +1,16 @@
-﻿using BankingSystem.Domain.IRepositories;
+﻿using BankingSystem.Application.Orchestration.Interfaces;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class TransactionCreateForm : Form
     {
-        private  readonly ITransactionRepository transactionRepository;
+        private  readonly IBankingService _bankingService
+            ;
 
-        public TransactionCreateForm(ITransactionRepository transactionRepository)
+        public TransactionCreateForm(IBankingService bankingService)
         {
             InitializeComponent();
-            this.transactionRepository = transactionRepository;
+            _bankingService = bankingService;
         }
     }
 }

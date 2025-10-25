@@ -20,5 +20,7 @@ namespace BankingSystem.Application.Orchestration.Interfaces
         public bool DeleteAccount(int accountId);
 
         public List<Account> GetAccountsByCustomerId(int customerId);
+
+        public DataTable GetTableTransactions();
     }
 }

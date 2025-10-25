@@ -1,52 +1,39 @@
-﻿using BankingSystem.Domain.IRepositories;
+﻿using BankingSystem.Application.Orchestration.Interfaces;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly ICustomerRepository _customerRepository;
-
-        private readonly IAccountRepository _accountRepository;
-
-        private readonly ITransactionRepository _transactionRepository;
+        private readonly IBankingService _bankingService;
 
         private CustomerForm? _customerForm;
         private AccountForm? _accountForm;
         private TransactionForm? _transactionForm;
 
-        public MainForm(ICustomerRepository customerRepo, IAccountRepository accountRepo, ITransactionRepository transactionRepository)
+        public MainForm(IBankingService bankingService)
         {
             InitializeComponent();
-            _customerRepository = customerRepo;
-            _accountRepository = accountRepo;
-            _transactionRepository = transactionRepository;
+            _bankingService = bankingService;
 
-            // Mostra a aba inicial (Customers)
+            // Exibe a aba inicial
             ShowCustomerForm();
         }
 
         private void TabControlMain_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (tabControlMain.SelectedTab == tabPageCustomers)
-            {
                 ShowCustomerForm();
-            }
             else if (tabControlMain.SelectedTab == tabPageAccounts)
-            {
                 ShowAccountForm();
-            }
             else if (tabControlMain.SelectedTab == tabPageTransactions)
-            {
                 ShowTransactionForm();
-            }
         }
 
         private void ShowCustomerForm()
         {
             panelContent.Controls.Clear();
 
-            _customerForm ??= new CustomerForm(_customerRepository);
+            _customerForm ??= new CustomerForm(_bankingService);
             _customerForm.TopLevel = false;
             _customerForm.FormBorderStyle = FormBorderStyle.None;
             _customerForm.Dock = DockStyle.Fill;
@@ -59,7 +46,7 @@ namespace BankingSystem.Winforms.Forms
         {
             panelContent.Controls.Clear();
 
-            _accountForm ??= new AccountForm(_accountRepository);
+            _accountForm ??= new AccountForm(_bankingService);
             _accountForm.TopLevel = false;
             _accountForm.FormBorderStyle = FormBorderStyle.None;
             _accountForm.Dock = DockStyle.Fill;
@@ -72,14 +59,13 @@ namespace BankingSystem.Winforms.Forms
         {
             panelContent.Controls.Clear();
 
-            _transactionForm ??= new TransactionForm(_transactionRepository);
+            _transactionForm ??= new TransactionForm(_bankingService);
             _transactionForm.TopLevel = false;
             _transactionForm.FormBorderStyle = FormBorderStyle.None;
             _transactionForm.Dock = DockStyle.Fill;
 
             panelContent.Controls.Add(_transactionForm);
             _transactionForm.Show();
-
         }
     }
 }

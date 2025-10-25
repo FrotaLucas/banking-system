@@ -1,16 +1,16 @@
 ﻿using System.Data;
-using BankingSystem.Domain.IRepositories;
+using BankingSystem.Application.Orchestration.Interfaces;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class AccountForm : Form
     {
-        private readonly IAccountRepository _accountRepo;
+        private readonly IBankingService _bankingService;
 
-        public AccountForm(IAccountRepository accountRepo)
+        public AccountForm(IBankingService bankingService)
         {
             InitializeComponent();
-            _accountRepo = accountRepo;
+            _bankingService = bankingService;
 
             LoadAccounts();
         }
@@ -19,7 +19,7 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                DataTable accounts = _accountRepo.GetTableAccount();
+                DataTable accounts = _bankingService.GetTableAccount();
                 dgvAccounts.DataSource = accounts;
 
                 if (dgvAccounts.Columns["colDelete"] == null)
@@ -41,7 +41,7 @@ namespace BankingSystem.Winforms.Forms
 
         private void btnAddAccount_Click(object sender, EventArgs e)
         {
-            using var form = new AccountCreateForm(_accountRepo);
+            using var form = new AccountCreateForm(_bankingService);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadAccounts();
@@ -63,7 +63,7 @@ namespace BankingSystem.Winforms.Forms
 
                 if (confirm == DialogResult.Yes)
                 {
-                    _accountRepo.DeleteAccount(accountId);
+                    _bankingService.DeleteAccount(accountId);
                     MessageBox.Show("Account deleted successfully!", "Success",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadAccounts();
@@ -79,7 +79,7 @@ namespace BankingSystem.Winforms.Forms
              if (dgvAccounts.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 var accountId = (int)dgvAccounts.Rows[e.RowIndex].Cells["Id"].Value;
-                _accountRepo.DeleteAccount(accountId);
+                _bankingService.DeleteAccount(accountId);
 
                 MessageBox.Show($"Account deleted successfully");
 

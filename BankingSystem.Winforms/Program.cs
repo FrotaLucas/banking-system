@@ -1,10 +1,15 @@
-﻿using BankingSystem.Domain.IRepositories;
+﻿using BankingSystem.Application.Orchestration;
+using BankingSystem.Application.Orchestration.Interfaces;
+using BankingSystem.Domain.IRepositories;
 using BankingSystem.Infrastructure;
 using BankingSystem.Infrastructure.Repositories;
 using BankingSystem.Winforms.Forms;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows.Forms;
+using BankingSystem.Winforms.Forms;
 
 namespace BankingSystem.Winforms
 {
@@ -35,6 +40,7 @@ namespace BankingSystem.Winforms
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IBankingService, BankingService>();
 
             var serviceProvider = services.BuildServiceProvider();
 
@@ -44,7 +50,7 @@ namespace BankingSystem.Winforms
             // 🔹 Resolve dependências do form principal
             var mainForm = ActivatorUtilities.CreateInstance<MainForm>(serviceProvider);
 
-            Application.Run(mainForm);
+            System.Windows.Forms.Application.Run(mainForm);
         }
     }
 }

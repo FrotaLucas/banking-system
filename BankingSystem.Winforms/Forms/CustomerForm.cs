@@ -1,16 +1,16 @@
 ﻿using System.Data;
-using BankingSystem.Domain.IRepositories;
+using BankingSystem.Application.Orchestration.Interfaces;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class CustomerForm : Form
     {
-        private readonly ICustomerRepository _customerRepo;
+        private readonly IBankingService _bankingService;
 
-        public CustomerForm(ICustomerRepository customerRepo)
+        public CustomerForm(IBankingService bankingService)
         {
             InitializeComponent();
-            _customerRepo = customerRepo;
+            _bankingService = bankingService;
 
             LoadCustomers();
         }
@@ -19,7 +19,7 @@ namespace BankingSystem.Winforms.Forms
         {
             try
             {
-                DataTable customers = _customerRepo.GetTableCustomer();
+                DataTable customers = _bankingService.GetTableCustomer();
                 dgvCustomers.DataSource = customers;
 
                 if (dgvCustomers.Columns["colEdit"] == null)
@@ -43,7 +43,7 @@ namespace BankingSystem.Winforms.Forms
 
         private void btnAddCustomer_Click(object sender, EventArgs e)
         {
-            using var form = new CustomerEditForm(_customerRepo);
+            using var form = new CustomerEditForm(_bankingService);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadCustomers(); 
@@ -60,7 +60,7 @@ namespace BankingSystem.Winforms.Forms
 
             if (dgvCustomers.Columns[e.ColumnIndex].Name == "colEdit")
             {
-                using (var form = new CustomerEditForm(_customerRepo, customerDataRow))
+                using (var form = new CustomerEditForm(_bankingService, customerDataRow))
                 {
                     if (form.ShowDialog() == DialogResult.OK)
                         MessageBox.Show("Customer updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -71,7 +71,7 @@ namespace BankingSystem.Winforms.Forms
             else if (dgvCustomers.Columns[e.ColumnIndex].Name == "colDelete")
             {
                 var customerId = (int)dgvCustomers.Rows[e.RowIndex].Cells["Id"].Value;
-                _customerRepo.DeleteCustomer(customerId);
+                _bankingService.DeleteCustomer(customerId);
                 
                 MessageBox.Show($"Customer deleted successfully");
 

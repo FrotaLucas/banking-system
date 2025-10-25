@@ -1,18 +1,18 @@
 ﻿using System.Data;
-using BankingSystem.Domain.IRepositories;
+using BankingSystem.Application.Orchestration.Interfaces;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class TransactionForm : Form
     {
-        private readonly ITransactionRepository _transactionRepository;
+        private readonly IBankingService _bankingService;
 
 
-        public TransactionForm(ITransactionRepository transactionRepository)
+        public TransactionForm(IBankingService bankingService)
         {
             InitializeComponent();
 
-            _transactionRepository = transactionRepository;
+            _bankingService = bankingService;
 
             LoadTransactions();
         }
@@ -25,7 +25,7 @@ namespace BankingSystem.Winforms.Forms
             try
             {
                 //v1
-                DataTable transactions = _transactionRepository.GetTableTransactions();
+                DataTable transactions = _bankingService.GetTableTransactions();
                 dgvTransactions.DataSource = transactions;  
                 
                 //v2 OPCAO PARA NOMEAR COLUNAS DAS TABELAS 
@@ -96,7 +96,7 @@ namespace BankingSystem.Winforms.Forms
         /// </summary>
         private void btnNewTransaction_Click(object sender, EventArgs e)
         {
-            using var newTransactionForm = new TransactionCreateForm(_transactionRepository);
+            using var newTransactionForm = new TransactionCreateForm(_bankingService);
             var result = newTransactionForm.ShowDialog();
 
             if (result == DialogResult.OK)

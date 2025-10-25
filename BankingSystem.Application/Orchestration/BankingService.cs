@@ -61,7 +61,7 @@ namespace BankingSystem.Application.Orchestration
 
         public DataTable GetTableAccount()
         {
-            throw new NotImplementedException();
+            return _accountRepository.GetTableAccount();
         }
 
         public void AddNewAccount(Customer customer, decimal balance)
@@ -77,6 +77,11 @@ namespace BankingSystem.Application.Orchestration
         public List<Account> GetAccountsByCustomerId(int customerId)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable GetTableTransactions()
+        {
+            return _transactionRepository.GetTableTransactions();
         }
     }
 }
