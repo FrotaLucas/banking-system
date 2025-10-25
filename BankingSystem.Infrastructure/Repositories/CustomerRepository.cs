@@ -74,29 +74,62 @@ namespace BankingSystem.Infrastructure.Repositories
             return affected > 0;
         }
 
-
         public void UpdateCustomer(Customer customer)
         {
             if (customer == null || customer.Id <= 0)
                 throw new ArgumentException("Invalid customer");
 
-            var row = _dataSet.Customers.Rows
-                .Cast<DataRow>()
-                .FirstOrDefault(r => (int)r["Id"] == customer.Id);
+            const string sql = @"
+                UPDATE Customers
+                SET FirstName = @FirstName,
+                    LastName = @LastName,
+                    Street = @Street,
+                    HouseNumber = @HouseNumber,
+                    ZipCode = @ZipCode,
+                    City = @City,
+                    Phone = @Phone,
+                    Email = @Email
+                WHERE Id = @Id";
 
-            if (row == null)
-                throw new InvalidOperationException($"Customer with Id {customer.Id} not found");
+            using var cmd = new SqlCommand(sql, _connection);
+            cmd.Parameters.AddWithValue("@Id", customer.Id);
+            cmd.Parameters.AddWithValue("@FirstName", customer.FirstName ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@LastName", customer.LastName ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Street", customer.Street ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@HouseNumber", customer.HouseNumber ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@ZipCode", customer.ZipCode ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@City", customer.City ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Phone", customer.Phone ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Email", customer.Email ?? (object)DBNull.Value);
 
-            row["FirstName"] = customer.FirstName;
-            row["LastName"] = customer.LastName;
-            row["Street"] = customer.Street;
-            row["HouseNumber"] = customer.HouseNumber;
-            row["ZipCode"] = customer.ZipCode;
-            row["City"] = customer.City;
-            row["Phone"] = customer.Phone;
-            row["Email"] = customer.Email;
+            if (_connection.State != ConnectionState.Open)
+                _connection.Open();
 
-            _adapter.Update(_dataSet, "Customers");
+            int affected = cmd.ExecuteNonQuery();
+
+            // Sincroniza DataSet local (opcional)
+            if (affected > 0)
+            {
+                var row = _dataSet.Customers.Rows
+                    .Cast<DataRow>()
+                    .FirstOrDefault(r => (int)r["Id"] == customer.Id);
+
+                if (row != null)
+                {
+                    row["FirstName"] = customer.FirstName;
+                    row["LastName"] = customer.LastName;
+                    row["Street"] = customer.Street;
+                    row["HouseNumber"] = customer.HouseNumber;
+                    row["ZipCode"] = customer.ZipCode;
+                    row["City"] = customer.City;
+                    row["Phone"] = customer.Phone;
+                    row["Email"] = customer.Email;
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException($"Customer with Id {customer.Id} not found or not updated.");
+            }
         }
     }
 }
