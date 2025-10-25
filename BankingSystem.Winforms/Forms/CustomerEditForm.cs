@@ -1,6 +1,6 @@
 ﻿using System.Data;
+using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
 using BankingSystem.Domain.Entities;
-using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {

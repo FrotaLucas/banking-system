@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Transactions;
-using BankingSystem.Domain.Interfaces.IRepositories;
+using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
 using Microsoft.Data.SqlClient;
 
 namespace BankingSystem.Infrastructure.Repositories

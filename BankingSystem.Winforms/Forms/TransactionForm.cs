@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using BankingSystem.Domain.Interfaces.IRepositories;
+using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {

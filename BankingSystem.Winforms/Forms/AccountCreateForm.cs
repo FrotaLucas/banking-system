@@ -1,5 +1,5 @@
-﻿using BankingSystem.Domain.Entities;
-using BankingSystem.Domain.Interfaces.IRepositories;
+﻿using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
+using BankingSystem.Domain.Entities;
 
 namespace BankingSystem.Winforms.Forms
 {
