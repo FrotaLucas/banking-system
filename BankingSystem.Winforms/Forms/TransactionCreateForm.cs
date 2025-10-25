@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BankingSystem.Domain.Interfaces.IRepositories;
 
 namespace BankingSystem.Winforms.Forms
 {
     public partial class TransactionCreateForm : Form
     {
-        public TransactionCreateForm()
+        private  readonly ITransactionRepository transactionRepository;
+
+        public TransactionCreateForm(ITransactionRepository transactionRepository)
         {
             InitializeComponent();
+            this.transactionRepository = transactionRepository;
         }
     }
 }
