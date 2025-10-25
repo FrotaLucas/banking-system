@@ -36,7 +36,9 @@ public class DbInitializer
                 );";
             new SqlCommand(createCustomers, connection).ExecuteNonQuery();
 
-            // Accounts  ATENCAO                     AccountNumber deve ser 30 para receber o tamanho da string NVARCHAR(30) 
+            // Accounts  ATENCAO                     AccountNumber deve ser 35 para receber o tamanho da string NVARCHAR(30) 
+            //colocar balance como inteiro oud decimal ao inves de string?
+
             string createAccounts = @"
                 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Accounts' and xtype='U')
                 CREATE TABLE Accounts (
@@ -48,19 +50,21 @@ public class DbInitializer
                 );";
             new SqlCommand(createAccounts, connection).ExecuteNonQuery();
 
+            //verificar se posso colcoar data como Data no DBInitializer
             // Transactions
-            //string createTransactions = @"
-            //    IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Transactions' and xtype='U')
-            //    CREATE TABLE Transactions (
-            //        TransactionId INT IDENTITY PRIMARY KEY,
-            //        AccountId INT,
-            //        Date DATETIME,
-            //        Amount DECIMAL(18,2),
-            //        Purpose NVARCHAR(100),
-            //        Type NVARCHAR(20),
-            //        FOREIGN KEY(AccountId) REFERENCES Accounts(AccountId)
-            //    );";
-            //new SqlCommand(createTransactions, connection).ExecuteNonQuery();
+            string createTransactions = @"
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Transactions' and xtype='U')
+                CREATE TABLE Transactions (
+                    Id INT IDENTITY PRIMARY KEY,
+                    AccountId INT,
+                    Date DATETIME,
+                    TransactionType NVARCHAR(20),
+                    Amount DECIMAL(18,2),
+                    Purpose NVARCHAR(100),
+                    IBAN NVARCHAR(35),
+                    FOREIGN KEY(AccountId) REFERENCES Accounts(Id)
+                );";
+            new SqlCommand(createTransactions, connection).ExecuteNonQuery();
         }
     }
 
@@ -79,6 +83,10 @@ public class DbInitializer
             var accountAdapter = new SqlDataAdapter("SELECT * FROM Accounts", connection);
             accountAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
             accountAdapter.Fill(ds, "Accounts");
+
+            var transactionAdapter = new SqlDataAdapter("SELECT * FROM Transactions", connection);
+            transactionAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            transactionAdapter.Fill(ds, "Transactions");
         }
 
         if (ds.Customers.Columns.Contains("Id"))
@@ -86,6 +94,9 @@ public class DbInitializer
 
         if (ds.Accounts.Columns.Contains("Id"))
             ds.Accounts.PrimaryKey = new DataColumn[] { ds.Accounts.Columns["Id"] };
+
+        if (ds.Transactions.Columns.Contains("Id"))
+            ds.Transactions.PrimaryKey = new DataColumn[] { ds.Transactions.Columns["Id"] };
 
         return ds;
     }
