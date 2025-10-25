@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
 using BankingSystem.Domain.Entities;
+using BankingSystem.Domain.IRepositories;
 using Microsoft.Data.SqlClient;
 
 namespace BankingSystem.Infrastructure.Repositories
@@ -31,7 +31,7 @@ namespace BankingSystem.Infrastructure.Repositories
 
         private string CreateAccountNumber()
         {
-           
+
             var random = new Random();
 
             Func<int, string> GenerateRandomDigits = (length) =>
@@ -58,9 +58,9 @@ namespace BankingSystem.Infrastructure.Repositories
                 $"{ibanNoSpaces.Substring(0, 4)} " +
                 $"{ibanNoSpaces.Substring(4, 4)} " +
                 $"{ibanNoSpaces.Substring(8, 4)} "; //+
-                //$"{ibanNoSpaces.Substring(12, 4)} " +
-                //$"{ibanNoSpaces.Substring(16, 4)} " +
-                //$"{ibanNoSpaces.Substring(20)}";
+                                                    //$"{ibanNoSpaces.Substring(12, 4)} " +
+                                                    //$"{ibanNoSpaces.Substring(16, 4)} " +
+                                                    //$"{ibanNoSpaces.Substring(20)}";
 
             return ibanFormatted;
 
@@ -135,15 +135,13 @@ namespace BankingSystem.Infrastructure.Repositories
 
             using (var connection = new SqlConnection(_adapter.SelectCommand.Connection.ConnectionString))
             {
-                const string query = @"
-            SELECT 
-                Id,
-                CustomerId,
-                AccountNumber,
-                Balance
-            FROM Accounts
-            WHERE CustomerId = @customerId;
-        ";
+                const string query = @"SELECT 
+                                            Id,
+                                            CustomerId,
+                                            AccountNumber,
+                                            Balance
+                                      FROM Accounts
+                                      WHERE CustomerId = @customerId;";
 
                 using (var command = new SqlCommand(query, connection))
                 {

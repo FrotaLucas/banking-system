@@ -1,4 +1,4 @@
-﻿using BankingSystem.Domain.Contracts.Interfaces.IRepositories;
+﻿using BankingSystem.Domain.IRepositories;
 using BankingSystem.Infrastructure;
 using BankingSystem.Infrastructure.Repositories;
 using BankingSystem.Winforms.Forms;

@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Transactions;
 
-namespace BankingSystem.Domain.Contracts.Interfaces.IRepositories
+namespace BankingSystem.Domain.IRepositories
 {
     public interface ITransactionRepository
     {
